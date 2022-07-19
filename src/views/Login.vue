@@ -1,11 +1,11 @@
 <template lang="pug">
-v-row(no-gutters)
+v-row
   v-col
-    header-login
+    header-login(@toggle="toggleBtn")
     v-container
       v-form(ref='form' v-model='valid' lazy-validation)
-        v-text-field(v-model='name' :counter='10' :rules='nameRules' label='Имя' required)
-        v-text-field(v-model='surname' :counter='10' :rules='surnameRules' label='Фамилия' required)
+        v-text-field(v-if="existField" v-model='name' :counter='10' :rules='nameRules' label='Имя' required)
+        v-text-field(v-if="existField" v-model='surname' :counter='10' :rules='surnameRules' label='Фамилия' required)
         v-text-field(v-model='email' :rules='emailRules' label='E-mail' required)
         v-text-field(
           v-model='password' :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" 
@@ -49,8 +49,13 @@ const passwordRules = reactive({
   min: v => v.length >= 8 || 'Минимально 8 символов'
 })
 
+
+const existField = ref(true)
+const toggleBtn = (data) => { existField.value = data } 
+
 const sendData = () => { console.log({ name: name.value, surname: surname.value, email: email.value, password: password.value }) }
 
 
 
 </script>
+

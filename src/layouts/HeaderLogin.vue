@@ -4,14 +4,16 @@ v-toolbar(color="gray")
   v-spacer
   v-list-item
     v-list-item-title
-      v-btn Войти
+      v-btn(@click="toggleBtn(false)") Войти
   v-list-item
     v-list-item-title
-      v-btn Регистрация
+      v-btn(@click="toggleBtn(true)") Регистрация
 
 </template>
 
 <script setup>
+const emit = defineEmits(['toggle'])
+const toggleBtn = (data) => { emit('toggle', data) }
 </script>
 
 <style scoped lang="scss">
