@@ -2,9 +2,13 @@
 v-toolbar(color="gray")
   router-link.link(to="/") Cloud
   v-spacer
-  div User
-  v-btn(icon)
-    fa.icon(icon="circle-user")
+  v-list-item
+    v-list-item-title
+      v-btn Войти
+  v-list-item
+    v-list-item-title
+      v-btn Регистрация
+
 </template>
 
 <script setup>

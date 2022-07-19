@@ -1,13 +1,14 @@
 <template lang="pug">
 v-app
-  v-row(no-gutters)
-    v-col
-      Header
-      v-container
-        router-view
+  component(:is="layout")
+  router-view
 </template>
 
 <script setup>
-import Header from '@/layouts/Header'
+import { computed } from '@vue/runtime-core'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const layout = computed(() => { route.meta.layout })
 
 </script>
