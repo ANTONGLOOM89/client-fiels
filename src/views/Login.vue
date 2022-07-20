@@ -21,6 +21,7 @@ v-row
 <script setup>
 import HeaderLogin from '@/layouts/HeaderLogin'
 import { reactive, ref, watch } from 'vue'
+import { useStore } from 'vuex'
 
 const valid = ref(true)
 
@@ -53,7 +54,23 @@ const passwordRules = reactive({
 const existField = ref(true)
 const toggleBtn = (data) => { existField.value = data } 
 
-const sendData = () => { console.log({ name: name.value, surname: surname.value, email: email.value, password: password.value }) }
+const store = useStore()
+
+// const sendData = () => { store.dispatch('addPerson', { 
+//     name: name.value, 
+//     surname: surname.value, 
+//     email: email.value, 
+//     password: password.value 
+//   })
+// }
+
+const sendData = () => { store.dispatch('loginPerson', {
+    email: email.value, 
+    password: password.value 
+  })
+}
+
+
 
 
 
