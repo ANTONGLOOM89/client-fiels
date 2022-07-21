@@ -3,6 +3,7 @@ v-row
   v-col
     header-login(@toggle="toggleBtn")
     v-container
+      h2 {{ existField ? 'Регистрация' : 'Вход' }}
       v-form(ref='form' v-model='valid' lazy-validation)
         v-text-field(v-if="existField" v-model='name' :counter='10' :rules='nameRules' label='Имя' required)
         v-text-field(v-if="existField" v-model='surname' :counter='10' :rules='surnameRules' label='Фамилия' required)
@@ -56,18 +57,20 @@ const toggleBtn = (data) => { existField.value = data }
 
 const store = useStore()
 
-// const sendData = () => { store.dispatch('addPerson', { 
-//     name: name.value, 
-//     surname: surname.value, 
-//     email: email.value, 
-//     password: password.value 
-//   })
-// }
-
-const sendData = () => { store.dispatch('loginPerson', {
-    email: email.value, 
-    password: password.value 
-  })
+const sendData = () => {
+  if(existField.value) {
+    store.dispatch('addPerson', { 
+      name: name.value, 
+      surname: surname.value, 
+      email: email.value, 
+      password: password.value 
+    })
+  } else {
+    store.dispatch('loginPerson', {
+      email: email.value, 
+      password: password.value 
+    })
+  }
 }
 
 

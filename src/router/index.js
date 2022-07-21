@@ -12,6 +12,10 @@ const routes = [
     name: 'main',
     meta: { layout: 'Main', requiresAuth: true },
     component: () => import('../views/Main.vue')
+  },
+  {
+    path: '/',
+    redirect: '/main'
   }
 ]
 

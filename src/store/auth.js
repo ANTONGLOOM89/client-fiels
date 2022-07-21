@@ -1,7 +1,7 @@
 import { apiRegistration, apiLogin } from '@/services/auth.services'
 
 const state = {
-
+  
 }
 
 const getters = {
@@ -14,15 +14,15 @@ const mutations = {
 
 const actions = {
   async addPerson({ commit, dispatch }, payload) {
-    console.log(payload)
     try {
       let res = await apiRegistration(payload)
       if (res.success) {
-        console.log(res)
         //dispatch('unsetModal')
         //dispatch('addToken', res.token)
+      }
+      else {
+        dispatch('addErrorModal', res)
       } 
-      //else dispatch('setErrorModal', res)
     } catch (e) {
       new Error(e)
     }
