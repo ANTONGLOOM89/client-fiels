@@ -12,6 +12,12 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 
+// const token = localStorage.getItem("token")
+
+// if (token) {
+//   Vue.prototype.$http.defaults.headers.common['Authorization'] = token
+// }
+
 library.add(fas, fab)
 loadFonts()
 
