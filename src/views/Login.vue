@@ -21,8 +21,9 @@ v-row
 
 <script setup>
 import HeaderLogin from '@/layouts/HeaderLogin'
-import { reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 const valid = ref(true)
 
@@ -48,7 +49,7 @@ const show = ref(false)
 const password = ref('')
 const passwordRules = reactive({
   required: value => !!value || 'Введите пароль',
-  min: v => v.length >= 8 || 'Минимально 8 символов'
+  min: v => v.length >= 1 || 'Минимально 1 символов'
 })
 
 
@@ -72,6 +73,14 @@ const sendData = () => {
     })
   }
 }
+
+const auth = computed(() => store.getters.isLoggedIn)
+const router = useRouter()
+
+watch(auth, (currentValue) => {
+  if (currentValue) router.push({ name: 'main' })
+})
+
 
 
 
