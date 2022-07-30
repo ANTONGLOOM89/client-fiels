@@ -1,11 +1,11 @@
 <template lang="pug">
-v-dialog(v-model='dialog' persistent='' max-width='490')
-  v-card
+v-dialog(v-model='dialog' persistent)
+  v-card(width='400')
     v-card-title
       fa.icon(icon="triangle-exclamation")
-      span Предупреждение!
-    v-card-text
-      | {{ modal.message }}
+      v-text Предупреждение!
+    v-card-text.pa-4
+      | {{ error.message }}
     v-card-actions
       v-spacer
       v-btn(color='green darken-1' text @click='closeModal')
@@ -17,9 +17,9 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
-const { modal } = defineProps({ modal:Object })
+const { error } = defineProps({ error:Object })
 
-const dialog = computed(() => ( modal ? true : false ))
+const dialog = computed(() => ( error ? true : false ))
 const closeModal = () => { store.dispatch('unsetErrorModal') }
 
 

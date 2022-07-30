@@ -1,12 +1,15 @@
 const state = {
-  errorModal: null
+  errorModal: null,
+  actionModal: null
 }
 
 const getters = {
-  getErrorModal: (state) => state.errorModal
+  getErrorModal: (state) => state.errorModal,
+  getActionModal: (state) => state.actionModal
 }
 const mutations = {
-  setErrorModal: (state, payload) => state.errorModal = payload
+  setErrorModal: (state, payload) => state.errorModal = payload,
+  setActionModal: (state, payload) => state.actionModal = payload
 }
 
 const actions = {
@@ -15,6 +18,12 @@ const actions = {
   },
   unsetErrorModal({ state }) { 
     state.errorModal = undefined 
+  },
+  addActionModal({ state, commit }, payload) {
+    commit('setActionModal', payload)
+  },
+  unsetActionModal({ state }) { 
+    state.actionModal = undefined
   }
 }
 

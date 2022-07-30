@@ -8,7 +8,7 @@ v-toolbar(color="gray")
 </template>
 
 <script setup>
-import { computed, onMounted, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
@@ -16,7 +16,7 @@ const { person } = defineProps({ person:Object })
 
 const store = useStore()
 
-const Logout = () => { store.dispatch('logoutPerson') }
+const Logout = () => { store.dispatch('addActionModal', { message: 'Выйти из системы?', info: 'logoutPerson' }) }
 
 const auth = computed(() => store.getters.isLoggedIn)
 
