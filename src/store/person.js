@@ -5,7 +5,7 @@ const state = {
 }
 
 const getters = {
-  getPerson: (state) => { state.person }
+  getPerson: (state) => state.person
 }
 
 const mutations = {
@@ -16,9 +16,8 @@ const actions = {
   async fetchOnePerson({ commit }, payload) {
     try {
       const res = await apiOnePerson(payload)
-      console.log(res)
-      //console.log('fetchOnePerson', res)
-      //commit('setOnePerson', res)
+      await localStorage.setItem('personId', payload)
+      commit('setOnePerson', res)
     } catch(e) {
       new Error(e)
     }

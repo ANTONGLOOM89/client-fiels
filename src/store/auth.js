@@ -1,5 +1,4 @@
 import { apiRegistration, apiLogin } from '@/services/auth.services'
-import axios from 'axios'
 
 const state = {
   token: localStorage.getItem('token') || ''
@@ -30,12 +29,11 @@ const actions = {
   async loginPerson({ dispatch }, payload) {
     try {
       let res = await apiLogin(payload)
-      console.log('res', res)
       if (res.success) {
         dispatch('addToken', res.token)
         dispatch('fetchOnePerson', res.person.id)
       }
-      else dispatch('setErrorModal', res)
+      else dispatch('addErrorModal', res)
     } catch (e) {
       new Error(e)
     }
@@ -43,16 +41,15 @@ const actions = {
   async logoutPerson ({ commit }) {
     try {
       await localStorage.removeItem('token')
+      await localStorage.removeItem('personId')
       commit('setLogout')
-      delete axios.defaults.headers.common['Authorization']
     } catch(e) {
       new Error(e)
     }
   },
   async addToken({ commit }, payload) {
     try {
-      axios.defaults.headers.common['Authorization'] = payload
-      localStorage.setItem('token', payload)
+      await localStorage.setItem('token', payload)
       commit('setToken', payload)
     } catch(e) {
       new Error(e)

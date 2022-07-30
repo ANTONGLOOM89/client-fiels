@@ -6,7 +6,6 @@ v-row
       h2 {{ existField ? 'Регистрация' : 'Вход' }}
       v-form(ref='form' v-model='valid' lazy-validation)
         v-text-field(v-if="existField" v-model='name' :counter='10' :rules='nameRules' label='Имя' required)
-        v-text-field(v-if="existField" v-model='surname' :counter='10' :rules='surnameRules' label='Фамилия' required)
         v-text-field(v-model='email' :rules='emailRules' label='E-mail' required)
         v-text-field(
           v-model='password' :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" 
@@ -33,11 +32,6 @@ const nameRules = reactive([
   v => (v && v.length <= 10) || 'Имя не должно быть больше 10 символов'
 ])
 
-const surname = ref('')
-const surnameRules = reactive([
-  v => !!v || 'Введите Фамилию',
-  v => (v && v.length <= 10) || 'Имя не должно быть больше 10 символов'
-])
 
 const email = ref('')
 const emailRules = reactive([
@@ -61,8 +55,7 @@ const store = useStore()
 const sendData = () => {
   if(existField.value) {
     store.dispatch('addPerson', { 
-      name: name.value, 
-      surname: surname.value, 
+      name: name.value,
       email: email.value, 
       password: password.value 
     })

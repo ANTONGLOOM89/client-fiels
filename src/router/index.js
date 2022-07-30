@@ -4,7 +4,7 @@ import guest from './middleware/guest'
 import auth from './middleware/auth'
 import middlewarePipeline from './middlewarePipeline'
 
-console.log(store.getters.isLoggedIn)
+
 
 const router = new createRouter({
   history: createWebHistory(),

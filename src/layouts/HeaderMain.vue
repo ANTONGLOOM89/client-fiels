@@ -1,28 +1,32 @@
 <template lang="pug">
 v-toolbar(color="gray")
-  router-link.link(to="/") Cloud
-  v-spacer
-  div(@click="Logout") fbfb
-  div User
   v-btn(icon)
     fa.icon(icon="circle-user")
+  v-toolbar-title {{person?.name}}
+  v-spacer
+  v-btn(@click="Logout") Выход
 </template>
 
 <script setup>
-import { computed, watch } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+
+const { person } = defineProps({ person:Object })
 
 const store = useStore()
 
 const Logout = () => { store.dispatch('logoutPerson') }
 
 const auth = computed(() => store.getters.isLoggedIn)
+
+
 const router = useRouter()
 
 watch(auth, (currentValue) => {
   if (!currentValue) router.push({ name: 'login' })
 })
+
 
 </script>
 
@@ -36,7 +40,7 @@ watch(auth, (currentValue) => {
 }
 
 .icon {
-  font-size: 19px;
+  font-size: 35px;
 }
 
 </style>
