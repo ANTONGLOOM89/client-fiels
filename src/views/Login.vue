@@ -15,7 +15,7 @@ v-row
           counter 
           @click:append='show = !show')
         v-btn.mr-4(:disabled='!valid' color='success' @click='sendData')
-          | Validate
+          | {{ existField ? 'Регистрация' : 'Вход' }}
 </template>
 
 <script setup>
