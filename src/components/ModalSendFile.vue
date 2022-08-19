@@ -33,7 +33,10 @@ const typeRules = reactive([
 const store = useStore()
 
 const closeForm = () => { store.dispatch('unsetFileModal') }
-const saveForm = () => { console.log('dvsdvsdvsdvds') }
+const saveForm = () => { 
+  store.dispatch('addFolder', { name: name.value, type: type.value, user_id: +localStorage.getItem('personId') })
+  closeForm()
+}
 
 
 </script>

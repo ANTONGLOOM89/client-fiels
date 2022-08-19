@@ -3,8 +3,9 @@
   .table__block
     .table__item(v-for="title in header") {{title}}
   .table__block(v-for="{ type, name, date_create, size } in folders")
-      .table__item
-        img(src="../assets/images/dir.svg")
+      .table__item.pointer
+        fa.icon(v-if="type === 'dir'" icon="folder")
+        fa.icon(v-else icon="file")
       .table__item {{name}}
       .table__item {{date_create}}
       .table__item {{size}}
@@ -30,6 +31,7 @@ const { folders } = defineProps({ folders:Array })
   &__item {
     padding: 10px 0px;
     border-bottom: 2px solid #6200EE;
+    cursor: pointer;
   }
 }
 </style>
