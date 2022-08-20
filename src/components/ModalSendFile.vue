@@ -9,7 +9,6 @@ modal-base(
   template(v-slot:content)
     v-form(ref='form' v-model='valid' lazy-validation)
       v-text-field(v-model='name' :rules='nameRules' label='Имя' required)
-      v-text-field(v-model='type' :rules='typeRules' label='Тип' required)
 </template>
 
 <script setup>
@@ -25,16 +24,11 @@ const nameRules = reactive([
   v => !!v || 'Введите Имя'
 ])
 
-const type = ref('')
-const typeRules = reactive([
-  v => !!v || 'Введите Тип'
-])
-
 const store = useStore()
 
 const closeForm = () => { store.dispatch('unsetFileModal') }
 const saveForm = () => { 
-  store.dispatch('addFolder', { name: name.value, type: type.value, user_id: +localStorage.getItem('personId') })
+  store.dispatch('addFolder', { name: name.value, type: 'dir', user_id: +localStorage.getItem('personId') })
   closeForm()
 }
 

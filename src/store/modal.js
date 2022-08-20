@@ -30,7 +30,6 @@ const actions = {
     state.actionModal = undefined
   },
   addFileModal({ commit }, payload) {
-    console.log(payload)
     commit('setFileModal', payload)
   },
   unsetFileModal({ commit } ) {
